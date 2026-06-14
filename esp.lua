@@ -1,3 +1,35 @@
+-- DERNOZ secure entry (key check via keys.json on GitHub)
+local KEY = _G.DERNOZ_KEY or (getgenv and getgenv().DERNOZ_KEY)
+if not KEY or KEY == "" then
+    return warn("[Dernoz] Не указан ключ. Используй загрузчик из бота.")
+end
+
+local KEYS_URL = "https://raw.githubusercontent.com/Dernoz/dernoz/main/keys.json"
+
+local ok, raw = pcall(function() return game:HttpGet(KEYS_URL) end)
+if not ok or not raw then
+    return warn("[Dernoz] Не удалось проверить ключ (нет связи).")
+end
+
+-- мини JSON-парсер ключей не нужен: используем HttpService
+local HttpService = game:GetService("HttpService")
+local okj, keys = pcall(function() return HttpService:JSONDecode(raw) end)
+if not okj or type(keys) ~= "table" then
+    return warn("[Dernoz] Ошибка данных ключей.")
+end
+
+local info = keys[KEY]
+if not info then
+    return warn("[Dernoz] Неверный ключ.")
+end
+if info.ban then
+    return warn("[Dernoz] Ключ заблокирован.")
+end
+if info.exp and info.exp ~= 0 and (os.time() * 1000) > info.exp then
+    return warn("[Dernoz] Срок действия ключа истёк.")
+end
+
+-- ключ валиден -> запускаем основной код ниже
 local Players          = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
 local RunService       = game:GetService("RunService")
