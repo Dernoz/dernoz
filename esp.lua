@@ -991,8 +991,9 @@ end)
 -- ═══════════════════════════════════════════
 local function showMenu()
     State.menuVisible = true
+    Main.Visible   = true          -- ← добавлено
+    Shadow.Visible = true          -- ← добавлено
     local h = State.minimized and MINI_H or FULL_H
-    -- центрируем перед показом
     Main.Position  = CENTER
     drag.targetPos = CENTER
     Main.BackgroundTransparency = 1
@@ -1021,6 +1022,12 @@ local function hideMenu()
         ImageTransparency=1,
         Size=UDim2.new(0,W+22,0,0),
     },0.22)
+    task.delay(0.26, function()        -- ← добавлено: прячем полностью после анимации
+        if not State.menuVisible then
+            Main.Visible   = false
+            Shadow.Visible = false
+        end
+    end)
 end
 
 -- ═══════════════════════════════════════════
