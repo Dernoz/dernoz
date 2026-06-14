@@ -1,6 +1,26 @@
 {
-  "DRNZ-ZDMX-UGRK-JKKY": {
-    "exp": 1783998094724,
+  "DRNZ-SVEB-8J6C-RNRY": {
+    "exp": 1781490697551,
+    "hwid": null,
+    "ban": false
+  },
+  "DRNZ-6R5L-8MVM-KGR6": {
+    "exp": 0,
+    "hwid": "d2",
+    "ban": false
+  },
+  "DRNZ-R7R3-M2WA-KBFD": {
+    "exp": 0,
+    "hwid": "diag",
+    "ban": false
+  },
+  "DRNZ-BCDZ-2HLQ-KA8C": {
+    "exp": 0,
+    "hwid": "diagtest",
+    "ban": false
+  },
+  "DRNZ-R4ZS-PMAD-XLW4": {
+    "exp": 1812510282580,
     "hwid": null,
     "ban": false
   }
